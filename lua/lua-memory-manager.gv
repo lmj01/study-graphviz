@@ -1,0 +1,20 @@
+digraph setting {
+	label = "lua memory manager"
+	labelloc = "t"
+	labeljust = "c"
+	
+	subgraph cluster_sub1 {
+		label = "ee"
+		labelloc = "t"
+		color = "red"
+		node [ style = "filled", color = "gray55" ]
+		
+		luaM_toobig 
+	}
+
+	api -> {
+		luaM_toobig,
+		luaM_realloc_,
+		luaM_growaux_
+	}
+}

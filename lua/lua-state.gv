@@ -1,0 +1,43 @@
+digraph graph_settings {
+	label = "lua state"
+	labelloc = "c"
+	rankdir = "TB"
+		
+	subgraph cluster_sub1 {
+		rank = "same";
+		label = "lua operator code bit layout"
+		labelloc = "t"
+		color = "red"
+		node [ style = "filled", color = "gray55" ]
+
+		oplayout 		
+	}
+	subgraph cluster_sub2 {
+		label = "handle the statement parser token"
+		labelloc = "t"
+		color = "blue"
+		node [ style = "filled", color = "black", fillcolor = "gray55" ]
+
+	}
+	{
+		rank = "LR";
+		struct -> {
+			stringtable,
+			CallInfo,
+			lua_State,
+			global_State,
+			GCUnion
+		}
+	}
+	{
+		rank = "LR";
+		api -> {
+			luaE_setdebt,
+			luaE_freethread,
+			luaE_extendCI,
+			luaE_freeCI,
+			luaE_shrinkCI
+		}
+	}
+
+}

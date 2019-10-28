@@ -1,0 +1,51 @@
+digraph graph_settings {
+
+	subgraph cluster_sub0 {
+		label = "lua operator code bit layout"
+		labelloc = "t"
+		color = "red"
+		//node [ style = "filled", color = "gray" ]
+
+		node [ shape=record ]
+		struct1 [ shape=record, label=" { | iABC | iABx | iAsBx | iAx } |
+			{ {24-31 | 16-23 | 8-15 } | {B:9 | C:9 | A:8} | {iABx:18 | A:8} | {iAsBx:18 | A:8} | {Ax:26}  } |
+			{ 0-7 | OpCode:6 | OpCode:6 | OpCode:6 | OpCode:6  }" ]
+	}
+	subgraph cluster_sub1 {
+		label = "lua operator code bit layout"
+		labelloc = "t"
+		color = "red"
+		//node [ style = "filled", color = "gray55" ]
+
+		oplayout [ shape = none, margin = 0, fontname = "SimSun" , label = <
+			<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+				<tr><td></td><td>31-24</td><td>23-16</td><td>15-8</td><td>0-7</td></tr>
+				<tr><td>iABC</td><td>B:9</td><td>C:9</td><td>A:8</td><td>Opcode:6</td></tr>
+				<tr><td>iABx</td><td colspan="2">Bx:18</td><td>A:8</td><td>Opcode:6</td></tr>
+				<tr><td>iAsBx</td><td colspan="2">sBx:18</td><td>A:8</td><td>Opcode:6</td></tr>
+				<tr><td>iAx</td><td colspan="3">Ax:26</td><td>Opcode:6</td></tr>
+			</table>
+		>];			
+	}
+	subgraph cluster_sub2 {
+		label = "handle the statement parser token"
+		labelloc = "t"
+		color = "blue"
+		node [ style = "filled", color = "black", fillcolor = "gray55" ]
+
+		opcode -> {
+			mode,
+			c, 
+			b,
+			a,
+			test		
+		} 
+		mode [ label = "bit0-1: op mode" ]
+		c [ label = "bit2-3: c arg mode" ]
+		b [ label = "bit4-5: b arg mode" ]
+		a [ label = "bit6: instruction set register A" ]
+		test [ label = "bit7: operator is a test, \nnext instruction must be a jump" ]
+	}
+
+	
+}

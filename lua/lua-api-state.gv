@@ -1,0 +1,16 @@
+digraph graph_settings {
+	label = "lua state"
+	labelloc = "t"
+	rankdir = "TB"
+	{
+		//rank = "LR";
+		api -> {
+			luaE_setdebt,
+			luaE_freethread,
+			luaE_extendCI,
+			luaE_freeCI,
+			luaE_shrinkCI
+		}
+	}
+
+}

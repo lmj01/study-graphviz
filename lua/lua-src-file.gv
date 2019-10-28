@@ -1,0 +1,80 @@
+digraph graph_settings {
+
+	node [ fontname = "Times-Roman" ]
+	src -> lprefix
+	src -> luaconf -> lua -> {
+		llimits,
+		luaxlib, 
+		lualib
+	}
+	
+	{ 
+		llimits, lua
+	} -> {  
+		lmem, lobject , lctype
+	}
+	
+	lobject -> { ltm_h, lfunc, ltable }
+	{ lua, lmem } -> lzio
+
+	{ lua, lobject, ltm_h, lzio } -> lstate_h -> ldebug_h
+	{ lobject, lstate_h } -> lgc_h
+	{ lgc_h, lobject, lstate_h } -> lstring_h
+	{ lobject, lzio } -> llex_h
+	{ lobject, lstate_h, lzio } -> ldo_h
+	{ ldo_h, lobject, ltm_h } -> lvm_h
+	{ llimits, lobject, lzio } -> {  lparser_h, lundump }
+
+	{ llimits, lstate_h } -> lapi_h
+	 llimits -> lopcodes
+	{ llex_h, lobject, lopcodes, lparser_h } -> lcode_h
+
+	src [ label = "source folder" color = "red" ]
+	lprefix [ label="lprefix.h " color="green"  comment="Definition for Lua code that must come before any other header file" ]
+	luaconf [ label="luaconf.h" color="green" ]
+
+	lua [ label="lua.h" color="green" ]
+	lua -> lua_impl
+	lua_impl [ label = "lua.c" color="blue" ]
+
+	lualib [ label = "lualib.h" color = "green" ]
+
+	luaxlib [ label = "luaxlib.h" color = "green" ]
+	luaxlib -> luaxlib_impl
+	luaxlib_impl [ label = "luaxlib.c" color = "blue" ]
+
+
+	llimits [ label = "llimits.h" color = "green" ]
+	
+	lopcodes [ label = "lopcodes.h" color = "green" ]
+	lopcodes -> lopcodes_impl
+	lopcodes_impl [ label = "lopcodes.c" color = "green" ]
+
+	lctype [ label = "lctype.h" color = "green" ]
+	lctype -> lctype_impl
+	lctype_impl [ label = "lctype.c"  color = "green" ]
+
+	lmem [ label = "lmem.h" color = "green" ]
+	lmem -> lmem_impl
+	lmem_impl [ label = "lmem.c" color = "green" ]
+
+	lzio [ label = "lzio.h" color = "green" ]
+	lzio -> lzio_impl
+	lzio_impl [ label = "lzio.c" color = "green" ]
+
+	lobject [ label = "lobject.h" color = "green" ]
+	lobject -> lobject_impl
+	lobject_impl [ label = "lobject.c" color = "blue" ]
+
+	lfunc [ label = "lfunc.h" color = "green" ]
+	lfunc -> lfunc_impl
+	lfunc_impl [ label = "lfunc.c" color = "blue" ]
+	
+	ltable [ label = "ltable.h" color="green" ]
+	ltable -> ltable_impl 
+	ltable_impl [ label = "ltable.c" color = "blue" ]
+	
+	lundump [ label = "lundump.h" color = "green" ]
+	lundump -> lundump_impl
+	lundump_impl [ label = "lundump.c"  color= "blue" ]
+}

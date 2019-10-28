@@ -1,0 +1,18 @@
+digraph setting {
+	label = "lua object"
+	labelloc = "t"
+	labeljust = "c"
+	
+	subgraph cluster_sub1 {
+		label = "ee"
+		labelloc = "t"
+		color = "red"
+		node [ style = "filled", color = "gray55" ]
+		
+		luaO_int2fb 
+	}
+
+	api -> {
+		luaO_int2fb
+	}
+}

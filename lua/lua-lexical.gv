@@ -1,0 +1,22 @@
+digraph setting {
+	labeljust = "c"
+	
+	subgraph cluster_sub1 {
+		label = "ee"
+		labelloc = "t"
+		color = "red"
+		node [ style = "filled", color = "gray55" ]
+		
+		luaX_init -> a -> b
+	}
+
+	api -> {
+		luaX_init,
+		luaX_setinput,
+		luaX_newstring,
+		luaX_next,
+		luaX_lookahead,
+		luaX_syntaxerror,
+		luaX_token2str
+	}
+}

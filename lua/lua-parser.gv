@@ -1,0 +1,32 @@
+digraph graph_settings {
+	
+	labeljust = "c"
+	start [ shape = "Mcircle" ]
+	end [ shape = "Mcircle" ]
+	
+
+	subgraph cluster_sub1 {
+		label = "entry parser function"
+		labelloc = "t"
+		color = "red"
+		node [ style = "filled", color = "gray55" ]
+
+		parser -> {lexstate, funcstate, cl} -> mainfunc -> statlist -> block_follow -> statement
+	 	statement -> block_follow
+	}
+	subgraph cluster_sub2 {
+		label = "handle the statement parser token"
+		labelloc = "t"
+		color = "blue"
+		node [ style = "filled", color = "black", fillcolor = "gray55" ]
+
+		statementFunc -> {
+			emptyStatement,
+			if,while,do,for,repeat,
+			function,local,dbcolon,return,break,
+			other		
+		}
+	}
+
+	start -> part1 -> part2 -> end
+}
